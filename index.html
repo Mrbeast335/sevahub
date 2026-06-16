@@ -15,15 +15,19 @@
 
 body{
   background:#f4f6f9;
+  scroll-behavior:smooth;
 }
 
-/* NAVBAR */
+/* 🔥 STICKY NAVBAR */
 .navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:15px 30px;
-  background:#222;
+  background:#111;
   color:white;
 }
 
@@ -32,6 +36,7 @@ body{
   font-weight:bold;
 }
 
+/* LINKS */
 .nav-links{
   list-style:none;
   display:flex;
@@ -41,17 +46,48 @@ body{
 .nav-links a{
   text-decoration:none;
   color:white;
+  transition:0.3s;
 }
 
 .nav-links a:hover{
   color:#00c3ff;
 }
 
+/* ☰ HAMBURGER */
+.hamburger{
+  display:none;
+  font-size:26px;
+  cursor:pointer;
+}
+
+/* MOBILE MENU */
+@media(max-width:768px){
+  .nav-links{
+    position:absolute;
+    top:60px;
+    right:0;
+    background:#111;
+    flex-direction:column;
+    width:200px;
+    display:none;
+    padding:20px;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+
+  .hamburger{
+    display:block;
+  }
+}
+
 /* HERO */
 .hero{
-  padding:40px 20px;
+  padding:60px 20px;
   text-align:center;
-  background:white;
+  background:linear-gradient(135deg,#0d6efd,#00b4d8);
+  color:white;
 }
 
 .buttons{
@@ -60,22 +96,23 @@ body{
 
 .btn{
   display:inline-block;
-  background:#0d6efd;
-  color:white;
+  background:white;
+  color:#0d6efd;
   padding:12px 20px;
   margin:10px;
   text-decoration:none;
   border-radius:8px;
   font-weight:bold;
+  transition:0.3s;
 }
 
 .btn:hover{
-  background:#084298;
+  transform:scale(1.05);
 }
 
 /* SECTIONS */
 .section{
-  padding:40px 20px;
+  padding:50px 20px;
 }
 
 .section h2{
@@ -96,18 +133,18 @@ body{
   width:280px;
   padding:20px;
   border-radius:12px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
   text-align:center;
   transition:0.3s;
 }
 
 .card:hover{
-  transform:translateY(-5px);
+  transform:translateY(-8px);
 }
 
 /* FOOTER */
 footer{
-  background:#222;
+  background:#111;
   color:white;
   text-align:center;
   padding:20px;
@@ -118,90 +155,50 @@ footer{
 
 <body>
 
-<!-- NAVBAR -->
+<!-- 🔥 NAVBAR -->
 <nav class="navbar">
   <div class="logo">SevaHub</div>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="#contact">Contact</a></li>
+
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+    <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+    <li><a href="#faq" onclick="toggleMenu()">FAQ</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="home" class="hero">
-  <h2>Find Trusted Local Services Near You</h2>
-  <p>Quickly connect with Teachers, Bathroom Cleaners and Head Massage Providers in Jamui & Bhagalpur.</p>
+  <h1>Find Trusted Local Services</h1>
+  <p>Fast, Reliable & Nearby Service Providers</p>
 
   <div class="buttons">
-    <a class="btn" href="https://forms.gle/UJ3TEMYefYrQ45Vx9" target="_blank">Book a Service</a>
-    <a class="btn" href="https://forms.gle/gA8HVf1iFbYveoHU6" target="_blank">Join as Service Provider</a>
-  </div>
-</section>
-
-<!-- AREA -->
-<section id="services" class="section">
-  <h2>Select Your Area</h2>
-
-  <div style="text-align:center;">
-    <select style="padding:10px;width:220px;">
-      <option>Jamui</option>
-      <option>Bhagalpur</option>
-    </select>
-
-    <br><br>
-
-    <input type="text" placeholder="Enter Your Area" style="padding:10px;width:220px;">
+    <a class="btn" href="#">Book a Service</a>
+    <a class="btn" href="#">Join as Provider</a>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section class="section">
+<section id="services" class="section">
   <h2>Our Services</h2>
 
   <div class="cards">
 
     <div class="card">
       <h3>💆 Head Massage</h3>
-      <p>Professional head massage services at your location.</p>
-      <a class="btn" href="#">Book Now</a>
+      <p>At-home professional massage service.</p>
     </div>
 
     <div class="card">
-      <h3>🧹 Bathroom Cleaning</h3>
-      <p>Clean and hygienic bathroom cleaning service.</p>
-      <a class="btn" href="#">Book Now</a>
+      <h3>🧹 Cleaning</h3>
+      <p>Bathroom & home cleaning services.</p>
     </div>
 
     <div class="card">
-      <h3>📚 Teachers</h3>
-      <p>Find tutors and teachers near your area.</p>
-      <a class="btn" href="#">Book Now</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section">
-  <h2>How It Works</h2>
-
-  <div class="cards">
-
-    <div class="card">
-      <h3>1. Submit Request</h3>
-      <p>Fill the booking form with your details.</p>
-    </div>
-
-    <div class="card">
-      <h3>2. We Match</h3>
-      <p>We find a suitable service provider nearby.</p>
-    </div>
-
-    <div class="card">
-      <h3>3. Get Service</h3>
-      <p>The provider contacts you and completes the service.</p>
+      <h3>📚 Tutors</h3>
+      <p>Find best teachers near you.</p>
     </div>
 
   </div>
@@ -209,44 +206,40 @@ footer{
 
 <!-- FAQ -->
 <section id="faq" class="section">
-  <h2>Frequently Asked Questions</h2>
+  <h2>FAQ</h2>
 
   <div class="cards">
-
     <div class="card">
-      <h3>How do I book a service?</h3>
-      <p>Click Book Now and fill the booking form.</p>
+      <h3>How to book?</h3>
+      <p>Click book button and fill form.</p>
     </div>
 
     <div class="card">
-      <h3>Which districts are supported?</h3>
-      <p>Currently Jamui and Bhagalpur.</p>
+      <h3>Locations?</h3>
+      <p>Currently Jamui & Bhagalpur.</p>
     </div>
-
-    <div class="card">
-      <h3>How do providers join?</h3>
-      <p>Click Join as Service Provider and fill the form.</p>
-    </div>
-
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="section">
-  <h2>Contact Us</h2>
+  <h2>Contact</h2>
 
   <div class="card" style="margin:auto;">
-    <p>
-      For bookings, please use the Book a Service form.
-      We currently serve Jamui and Bhagalpur.
-    </p>
+    <p>Use our booking form or email us anytime.</p>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  © 2026 SevaHub | Jamui & Bhagalpur
+© 2026 SevaHub | Built with ❤️
 </footer>
+
+<!-- 🔥 JAVASCRIPT FOR MENU -->
+<script>
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>
