@@ -146,30 +146,19 @@ function book(){
     let name = document.getElementById("name");
     let phone = document.getElementById("phone");
     let service = document.getElementById("service");
-    let area = document.getElementById("area");
 
-    if(!name || !phone || !service || !area){
-      alert("Form missing!");
-      return;
-    }
-
-    if(!name.value || !phone.value || !service.value || !area.value){
+    if(!name.value || !phone.value || !service.value){
       alert("Fill all details");
       return;
     }
 
-    db.collection("bookings").add({
-      name: name.value,
-      phone: phone.value,
-      service: service.value,
-      area: area.value,
-      time: new Date()
-    }).then(() => {
-      alert("Booking Saved 🚀");
-    }).catch(err => {
-      console.log(err);
-      alert("Firebase error!");
-    });
+    // Save temporarily
+    localStorage.setItem("name", name.value);
+    localStorage.setItem("phone", phone.value);
+    localStorage.setItem("service", service.value);
+
+    // Open next page
+    window.location.href = "area.html";
 
   } catch (err) {
     console.log(err);
@@ -234,7 +223,6 @@ window.onload = loadBookings;
   <option>Teacher</option>
 </select>
 
-<input id="area" placeholder="Area">
 
 <button onclick="book()" class="btn">Book Now</button>
 
