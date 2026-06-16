@@ -132,11 +132,51 @@ const firebaseConfig = {
   appId: "YOUR_APP_ID"
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+
+// 👇👇👇 YAHAN PASTE KARNA HAI STEP 2 FUNCTION 👇👇👇
+
+function confirmBooking() {
+
+  let name = localStorage.getItem("name");
+  let phone = localStorage.getItem("phone");
+  let service = localStorage.getItem("service");
+  let area = document.getElementById("area").value;
+
+  if (!name || !phone || !service) {
+    alert("Home data missing");
+    return;
+  }
+
+  if (!area) {
+    alert("Select area");
+    return;
+  }
+
+  db.collection("bookings").add({
+    name: name,
+    phone: phone,
+    service: service,
+    area: area,
+    time: firebase.firestore.FieldValue.serverTimestamp()
+  })
+
+  .then(() => {
+    alert("Booking Confirmed!");
+    localStorage.clear();
+    window.location.href = "index.html";
+  })
+
+  .catch(err => {
+    alert("Firebase error");
+    console.log(err);
+  });
+
 }
 
-const db = firebase.firestore();
+</script>
 
 /* BOOK FUNCTION */
 function goToArea() {
