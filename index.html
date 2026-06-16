@@ -124,12 +124,12 @@ footer{
 
 <script>
 const firebaseConfig = {
-  apiKey: "PASTE_HERE",
-  authDomain: "PASTE_HERE",
-  projectId: "PASTE_HERE",
-  storageBucket: "PASTE_HERE",
-  messagingSenderId: "PASTE_HERE",
-  appId: "PASTE_HERE"
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_ID",
+  storageBucket: "YOUR_BUCKET",
+  messagingSenderId: "YOUR_ID",
+  appId: "YOUR_APP_ID"
 };
 
 if (!firebase.apps.length) {
@@ -137,39 +137,45 @@ if (!firebase.apps.length) {
 }
 
 const db = firebase.firestore();
+</script>
 
 /* BOOK FUNCTION */
 function book(){
 
-let name = document.getElementById("name");
-let phone = document.getElementById("phone");
-let service = document.getElementById("service");
-let area = document.getElementById("area");
+  try {
 
-if(!name || !phone || !service || !area){
-  alert("Form missing!");
-  return;
-}
+    let name = document.getElementById("name");
+    let phone = document.getElementById("phone");
+    let service = document.getElementById("service");
+    let area = document.getElementById("area");
 
-if(!name.value || !phone.value || !service.value || !area.value){
-  alert("Fill all details");
-  return;
-}
+    if(!name || !phone || !service || !area){
+      alert("Form missing!");
+      return;
+    }
 
-  if(!name.value || !phone.value || !area.value){
-    alert("Fill all details");
-    return;
+    if(!name.value || !phone.value || !service.value || !area.value){
+      alert("Fill all details");
+      return;
+    }
+
+    db.collection("bookings").add({
+      name: name.value,
+      phone: phone.value,
+      service: service.value,
+      area: area.value,
+      time: new Date()
+    }).then(() => {
+      alert("Booking Saved 🚀");
+    }).catch(err => {
+      console.log(err);
+      alert("Firebase error!");
+    });
+
+  } catch (err) {
+    console.log(err);
+    alert("Something went wrong");
   }
-
-  db.collection("bookings").add({
-    name: name.value,
-    phone: phone.value,
-    service: service.value,
-    area: area.value,
-    time: new Date()
-  });
-
-  alert("Booking Saved 🚀");
 }
 
 /* LOAD BOOKINGS */
