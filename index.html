@@ -3,43 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SevaHub 4.0</title>
+<title>SevaHub Live</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
-}
-
 body{
+  margin:0;
+  font-family:Arial;
   background:#0f172a;
   color:white;
-  scroll-behavior:smooth;
 }
 
-/* NAVBAR */
 .navbar{
   position:sticky;
   top:0;
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  padding:15px 25px;
+  padding:15px;
   background:#111827;
-  z-index:1000;
-}
-
-.logo{
-  font-size:20px;
-  font-weight:bold;
 }
 
 .nav-links{
-  list-style:none;
   display:flex;
-  gap:20px;
+  gap:15px;
+  list-style:none;
 }
 
 .nav-links a{
@@ -47,250 +33,145 @@ body{
   text-decoration:none;
 }
 
-.nav-links a:hover{
-  color:#38bdf8;
-}
-
-/* MOBILE */
-.hamburger{
-  display:none;
-  font-size:26px;
-  cursor:pointer;
-}
-
-@media(max-width:768px){
-  .nav-links{
-    position:absolute;
-    top:60px;
-    right:0;
-    background:#111827;
-    flex-direction:column;
-    width:200px;
-    display:none;
-    padding:15px;
-  }
-
-  .nav-links.active{
-    display:flex;
-  }
-
-  .hamburger{
-    display:block;
-  }
-}
-
-/* HERO */
 .hero{
   text-align:center;
-  padding:70px 20px;
+  padding:50px;
   background:linear-gradient(135deg,#2563eb,#06b6d4);
 }
 
-.hero h1{
-  font-size:40px;
+.section{
+  padding:30px;
+  text-align:center;
 }
 
-/* BUTTON */
-.btn{
-  padding:12px 18px;
+.form{
+  max-width:400px;
+  margin:auto;
+}
+
+input,select{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+}
+
+button{
+  padding:10px;
+  width:100%;
   background:#38bdf8;
   border:none;
-  color:black;
-  font-weight:bold;
-  border-radius:8px;
   cursor:pointer;
-  margin-top:10px;
-}
-
-/* CARD */
-.cards{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-  padding:20px;
+  font-weight:bold;
 }
 
 .card{
   background:#1f2937;
-  padding:20px;
-  border-radius:12px;
-  width:260px;
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:scale(1.05);
-}
-
-/* FORM */
-.form{
-  max-width:400px;
-  margin:auto;
-  background:#1f2937;
-  padding:20px;
-  border-radius:12px;
-}
-
-input, select{
-  width:100%;
   padding:10px;
-  margin:8px 0;
-  border-radius:6px;
-  border:none;
-}
-
-/* ADMIN */
-.admin{
-  background:#111827;
-  padding:20px;
-  margin:20px;
-  border-radius:12px;
-}
-
-.request{
-  background:#1f2937;
-  padding:10px;
-  margin:10px 0;
+  margin:10px;
   border-radius:8px;
-}
-
-/* TOAST */
-.toast{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#38bdf8;
-  color:black;
-  padding:10px 15px;
-  border-radius:8px;
-  display:none;
-}
-
-footer{
-  text-align:center;
-  padding:20px;
-  background:#111827;
-  margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="logo">SevaHub 4.0</div>
-
-  <div class="hamburger" onclick="toggleMenu()">☰</div>
-
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#home" onclick="toggleMenu()">Home</a></li>
-    <li><a href="#book" onclick="toggleMenu()">Book</a></li>
-    <li><a href="#admin" onclick="toggleMenu()">Admin</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section id="home" class="hero">
-  <h1>SevaHub 4.0</h1>
-  <p>Smart Local Service Platform + Admin System</p>
-</section>
-
-<!-- SERVICES -->
-<div class="cards">
-  <div class="card">💆 Head Massage</div>
-  <div class="card">🧹 Cleaning</div>
-  <div class="card">📚 Tutor</div>
+<!-- NAV -->
+<div class="navbar">
+  <div><b>SevaHub</b></div>
 </div>
 
-<!-- BOOKING -->
-<section id="book">
-  <h2 style="text-align:center;">Book Service</h2>
+<!-- HERO -->
+<div class="hero">
+  <h1>SevaHub Live</h1>
+  <p>Real Booking System with Firebase</p>
+</div>
+
+<!-- FORM -->
+<div class="section">
+  <h2>Book Service</h2>
 
   <div class="form">
     <input id="name" placeholder="Name">
     <input id="phone" placeholder="Phone">
-    
+
     <select id="service">
-      <option>Head Massage</option>
+      <option>Massage</option>
       <option>Cleaning</option>
       <option>Tutor</option>
     </select>
 
     <input id="area" placeholder="Area">
 
-    <button class="btn" onclick="book()">Submit</button>
+    <button onclick="book()">Book Now</button>
   </div>
-</section>
+</div>
 
 <!-- ADMIN -->
-<section id="admin" class="admin">
-  <h2>Admin Panel (Requests)</h2>
-  <div id="requests"></div>
-</section>
+<div class="section">
+  <h2>Live Bookings</h2>
+  <div id="data"></div>
+</div>
 
-<!-- TOAST -->
-<div class="toast" id="toast">Saved ✅</div>
-
-<footer>
-© 2026 SevaHub 4.0
-</footer>
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
-function toggleMenu(){
-  document.getElementById("navLinks").classList.toggle("active");
-}
 
-/* SAVE REQUEST */
+// 🔥 PASTE YOUR FIREBASE CONFIG HERE
+const firebaseConfig = {
+  apiKey: "PASTE",
+  authDomain: "PASTE",
+  projectId: "PASTE",
+  storageBucket: "PASTE",
+  messagingSenderId: "PASTE",
+  appId: "PASTE"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// BOOKING SAVE
 function book(){
+
   let name=document.getElementById("name").value;
   let phone=document.getElementById("phone").value;
   let service=document.getElementById("service").value;
   let area=document.getElementById("area").value;
 
   if(!name || !phone || !area){
-    alert("Fill all details");
+    alert("Fill all fields");
     return;
   }
 
-  let data = {name, phone, service, area};
+  db.collection("bookings").add({
+    name, phone, service, area,
+    time: new Date()
+  });
 
-  let old = JSON.parse(localStorage.getItem("requests") || "[]");
-  old.push(data);
-  localStorage.setItem("requests", JSON.stringify(old));
-
-  showToast();
-  loadRequests();
+  alert("Booking Saved 🚀");
 }
 
-/* LOAD ADMIN DATA */
-function loadRequests(){
-  let box=document.getElementById("requests");
-  let data=JSON.parse(localStorage.getItem("requests") || "[]");
-
+// LIVE LOAD
+db.collection("bookings")
+.orderBy("time","desc")
+.onSnapshot(snapshot=>{
+  let box=document.getElementById("data");
   box.innerHTML="";
 
-  data.forEach((r,i)=>{
+  snapshot.forEach(doc=>{
+    let d=doc.data();
+
     box.innerHTML += `
-      <div class="request">
-        <b>${r.name}</b><br>
-        ${r.phone}<br>
-        ${r.service} - ${r.area}
+      <div class="card">
+        <b>${d.name}</b><br>
+        ${d.phone}<br>
+        ${d.service} - ${d.area}
       </div>
     `;
   });
-}
+});
 
-/* TOAST */
-function showToast(){
-  let t=document.getElementById("toast");
-  t.style.display="block";
-  setTimeout(()=>t.style.display="none",2000);
-}
-
-/* INIT */
-loadRequests();
 </script>
 
 </body>
