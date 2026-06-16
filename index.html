@@ -3,40 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SevaHub Live</title>
+<title>SevaHub Global</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial;
-  background:#0f172a;
+  background:#0a0f1c;
   color:white;
 }
 
 .navbar{
-  position:sticky;
-  top:0;
   display:flex;
   justify-content:space-between;
   padding:15px;
   background:#111827;
-}
-
-.nav-links{
-  display:flex;
-  gap:15px;
-  list-style:none;
-}
-
-.nav-links a{
-  color:white;
-  text-decoration:none;
+  position:sticky;
+  top:0;
 }
 
 .hero{
   text-align:center;
-  padding:50px;
-  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  padding:70px 20px;
+  background:linear-gradient(135deg,#1e3a8a,#06b6d4);
 }
 
 .section{
@@ -45,19 +34,24 @@ body{
 }
 
 .form{
-  max-width:400px;
+  max-width:420px;
   margin:auto;
+  background:#111827;
+  padding:20px;
+  border-radius:12px;
 }
 
 input,select{
   width:100%;
   padding:10px;
   margin:8px 0;
+  border:none;
+  border-radius:6px;
 }
 
 button{
-  padding:10px;
   width:100%;
+  padding:10px;
   background:#38bdf8;
   border:none;
   cursor:pointer;
@@ -66,47 +60,47 @@ button{
 
 .card{
   background:#1f2937;
-  padding:10px;
+  padding:12px;
   margin:10px;
-  border-radius:8px;
+  border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
 <div class="navbar">
-  <div><b>SevaHub</b></div>
+  <b>SevaHub Global</b>
 </div>
 
-<!-- HERO -->
 <div class="hero">
-  <h1>SevaHub Live</h1>
-  <p>Real Booking System with Firebase</p>
+  <h1>Global Service Network</h1>
+  <p>Multi-city scalable platform (India ready → Global ready)</p>
 </div>
 
-<!-- FORM -->
 <div class="section">
-  <h2>Book Service</h2>
 
-  <div class="form">
-    <input id="name" placeholder="Name">
-    <input id="phone" placeholder="Phone">
+<h2>Book Service</h2>
 
-    <select id="service">
-      <option>Massage</option>
-      <option>Cleaning</option>
-      <option>Tutor</option>
-    </select>
+<div class="form">
+  <input id="name" placeholder="Name">
+  <input id="phone" placeholder="Phone">
 
-    <input id="area" placeholder="Area">
+  <select id="service">
+    <option>Massage</option>
+    <option>Cleaning</option>
+    <option>Tutor</option>
+    <option>Electrician</option>
+  </select>
 
-    <button onclick="book()">Book Now</button>
-  </div>
+  <input id="city" placeholder="City">
+  <input id="area" placeholder="Area">
+
+  <button onclick="book()">Submit</button>
 </div>
 
-<!-- ADMIN -->
+</div>
+
 <div class="section">
   <h2>Live Bookings</h2>
   <div id="data"></div>
@@ -118,7 +112,6 @@ button{
 
 <script>
 
-// 🔥 PASTE YOUR FIREBASE CONFIG HERE
 const firebaseConfig = {
   apiKey: "PASTE",
   authDomain: "PASTE",
@@ -131,45 +124,49 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// BOOKING SAVE
+/* GLOBAL BOOKING */
 function book(){
 
-  let name=document.getElementById("name").value;
-  let phone=document.getElementById("phone").value;
-  let service=document.getElementById("service").value;
-  let area=document.getElementById("area").value;
+  let data = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    service: document.getElementById("service").value,
+    city: document.getElementById("city").value,
+    area: document.getElementById("area").value,
+    time: Date.now()
+  };
 
-  if(!name || !phone || !area){
-    alert("Fill all fields");
+  if(!data.name || !data.phone || !data.city){
+    alert("Fill required fields");
     return;
   }
 
-  db.collection("bookings").add({
-    name, phone, service, area,
-    time: new Date()
-  });
+  db.collection("global_bookings").add(data);
 
-  alert("Booking Saved 🚀");
+  alert("Booking sent globally 🚀");
 }
 
-// LIVE LOAD
-db.collection("bookings")
+/* LIVE GLOBAL DATA */
+db.collection("global_bookings")
 .orderBy("time","desc")
-.onSnapshot(snapshot=>{
+.onSnapshot(snap=>{
+
   let box=document.getElementById("data");
   box.innerHTML="";
 
-  snapshot.forEach(doc=>{
+  snap.forEach(doc=>{
     let d=doc.data();
 
     box.innerHTML += `
       <div class="card">
         <b>${d.name}</b><br>
         ${d.phone}<br>
-        ${d.service} - ${d.area}
+        ${d.service}<br>
+        ${d.city} - ${d.area}
       </div>
     `;
   });
+
 });
 
 </script>
