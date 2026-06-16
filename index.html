@@ -206,27 +206,8 @@ function loadBookings(){
 
 window.onload = loadBookings;
 </script>
+
   
-
-    db.collection("bookings").add({
-      name: name.value,
-      phone: phone.value,
-      service: service.value,
-      area: area.value,
-      time: new Date()
-    }).then(() => {
-      alert("Booking Saved 🚀");
-    }).catch(err => {
-      console.log(err);
-      alert("Firebase error!");
-    });
-
-  } catch (err) {
-    console.log(err);
-    alert("Something went wrong");
-  }
-}
-
 /* LOAD BOOKINGS */
 function loadBookings(){
 
