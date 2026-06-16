@@ -122,6 +122,7 @@ footer{
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
+<script>
 const firebaseConfig = {
   apiKey: "PASTE_HERE",
   authDomain: "PASTE_HERE",
@@ -131,21 +132,29 @@ const firebaseConfig = {
   appId: "PASTE_HERE"
 };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
 const db = firebase.firestore();
 
 /* BOOK FUNCTION */
 function book(){
 
-  let name = document.getElementById("name");
-  let phone = document.getElementById("phone");
-  let service = document.getElementById("service");
-  let area = document.getElementById("area");
+let name = document.getElementById("name");
+let phone = document.getElementById("phone");
+let service = document.getElementById("service");
+let area = document.getElementById("area");
 
-  if(!name || !phone || !area){
-    alert("Form missing!");
-    return;
-  }
+if(!name || !phone || !service || !area){
+  alert("Form missing!");
+  return;
+}
+
+if(!name.value || !phone.value || !service.value || !area.value){
+  alert("Fill all details");
+  return;
+}
 
   if(!name.value || !phone.value || !area.value){
     alert("Fill all details");
@@ -202,30 +211,25 @@ window.onload = loadBookings;
   </ul>
 </nav>
 
-<!-- HERO -->
+<section id="home" class="hero">
+
 <h2>Find Trusted Local Services Near You</h2>
+
 <p>Quickly connect with Teachers, Bathroom Cleaners and Head Massage Providers in Jamui & Bhagalpur.</p>
 
-<!-- 🔥 ADD THIS FORM (NEW PART) -->
-<input id="name" placeholder="Your Name" style="padding:10px;margin:5px;"><br>
-<input id="phone" placeholder="Phone" style="padding:10px;margin:5px;"><br>
+<input id="name" placeholder="Your Name">
+<input id="phone" placeholder="Phone">
 
-<select id="service" style="padding:10px;margin:5px;">
+<select id="service">
   <option>Head Massage</option>
   <option>Bathroom Cleaning</option>
   <option>Teacher</option>
-</select><br>
+</select>
 
-<input id="area" placeholder="Area" style="padding:10px;margin:5px;"><br>
+<input id="area" placeholder="Area">
 
 <button onclick="book()" class="btn">Book Now</button>
-  <h2>Find Trusted Local Services Near You</h2>
-  <p>Quickly connect with Teachers, Bathroom Cleaners and Head Massage Providers in Jamui & Bhagalpur.</p>
 
-  <div class="buttons">
-    <a class="btn" href="https://forms.gle/UJ3TEMYefYrQ45Vx9" target="_blank">Book a Service</a>
-    <a class="btn" href="https://forms.gle/gA8HVf1iFbYveoHU6" target="_blank">Join as Service Provider</a>
-  </div>
 </section>
 
 <!-- AREA -->
@@ -295,6 +299,11 @@ window.onload = loadBookings;
   </div>
 </section>
 
+<section class="section">
+  <h2>Live Bookings</h2>
+  <div id="requests" class="cards"></div>
+</section>
+  
 <!-- FAQ -->
 <section id="faq" class="section">
   <h2>Frequently Asked Questions</h2>
@@ -354,6 +363,7 @@ window.onload = loadBookings;
 
   </div>
 </section>
+
 
 <!-- FOOTER -->
 <footer>
