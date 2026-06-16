@@ -206,23 +206,7 @@ function loadBookings(){
 
 window.onload = loadBookings;
 </script>
-
-  try {
-
-    let name = document.getElementById("name");
-    let phone = document.getElementById("phone");
-    let service = document.getElementById("service");
-    let area = document.getElementById("area");
-
-    if(!name || !phone || !service || !area){
-      alert("Form missing!");
-      return;
-    }
-
-    if(!name.value || !phone.value || !service.value || !area.value){
-      alert("Fill all details");
-      return;
-    }
+  
 
     db.collection("bookings").add({
       name: name.value,
