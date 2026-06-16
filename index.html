@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SevaHub</title>
+<title>SevaHub 4.0</title>
 
 <style>
 *{
@@ -14,21 +14,21 @@
 }
 
 body{
-  background:#f4f6f9;
+  background:#0f172a;
+  color:white;
   scroll-behavior:smooth;
 }
 
-/* 🔥 STICKY NAVBAR */
+/* NAVBAR */
 .navbar{
   position:sticky;
   top:0;
-  z-index:1000;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 30px;
-  background:#111;
-  color:white;
+  padding:15px 25px;
+  background:#111827;
+  z-index:1000;
 }
 
 .logo{
@@ -36,7 +36,6 @@ body{
   font-weight:bold;
 }
 
-/* LINKS */
 .nav-links{
   list-style:none;
   display:flex;
@@ -44,33 +43,31 @@ body{
 }
 
 .nav-links a{
-  text-decoration:none;
   color:white;
-  transition:0.3s;
+  text-decoration:none;
 }
 
 .nav-links a:hover{
-  color:#00c3ff;
+  color:#38bdf8;
 }
 
-/* ☰ HAMBURGER */
+/* MOBILE */
 .hamburger{
   display:none;
   font-size:26px;
   cursor:pointer;
 }
 
-/* MOBILE MENU */
 @media(max-width:768px){
   .nav-links{
     position:absolute;
     top:60px;
     right:0;
-    background:#111;
+    background:#111827;
     flex-direction:column;
     width:200px;
     display:none;
-    padding:20px;
+    padding:15px;
   }
 
   .nav-links.active{
@@ -84,161 +81,216 @@ body{
 
 /* HERO */
 .hero{
-  padding:60px 20px;
   text-align:center;
-  background:linear-gradient(135deg,#0d6efd,#00b4d8);
-  color:white;
+  padding:70px 20px;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
 }
 
-.buttons{
-  margin-top:20px;
+.hero h1{
+  font-size:40px;
 }
 
+/* BUTTON */
 .btn{
-  display:inline-block;
-  background:white;
-  color:#0d6efd;
-  padding:12px 20px;
-  margin:10px;
-  text-decoration:none;
-  border-radius:8px;
+  padding:12px 18px;
+  background:#38bdf8;
+  border:none;
+  color:black;
   font-weight:bold;
-  transition:0.3s;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
 }
 
-.btn:hover{
-  transform:scale(1.05);
-}
-
-/* SECTIONS */
-.section{
-  padding:50px 20px;
-}
-
-.section h2{
-  text-align:center;
-  margin-bottom:25px;
-}
-
-/* CARDS */
+/* CARD */
 .cards{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
   gap:20px;
+  padding:20px;
 }
 
 .card{
-  background:white;
-  width:280px;
+  background:#1f2937;
   padding:20px;
   border-radius:12px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-  text-align:center;
+  width:260px;
   transition:0.3s;
 }
 
 .card:hover{
-  transform:translateY(-8px);
+  transform:scale(1.05);
 }
 
-/* FOOTER */
+/* FORM */
+.form{
+  max-width:400px;
+  margin:auto;
+  background:#1f2937;
+  padding:20px;
+  border-radius:12px;
+}
+
+input, select{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:6px;
+  border:none;
+}
+
+/* ADMIN */
+.admin{
+  background:#111827;
+  padding:20px;
+  margin:20px;
+  border-radius:12px;
+}
+
+.request{
+  background:#1f2937;
+  padding:10px;
+  margin:10px 0;
+  border-radius:8px;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#38bdf8;
+  color:black;
+  padding:10px 15px;
+  border-radius:8px;
+  display:none;
+}
+
 footer{
-  background:#111;
-  color:white;
   text-align:center;
   padding:20px;
-  margin-top:30px;
+  background:#111827;
+  margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 NAVBAR -->
+<!-- NAVBAR -->
 <nav class="navbar">
-  <div class="logo">SevaHub</div>
+  <div class="logo">SevaHub 4.0</div>
 
   <div class="hamburger" onclick="toggleMenu()">☰</div>
 
   <ul class="nav-links" id="navLinks">
     <li><a href="#home" onclick="toggleMenu()">Home</a></li>
-    <li><a href="#services" onclick="toggleMenu()">Services</a></li>
-    <li><a href="#faq" onclick="toggleMenu()">FAQ</a></li>
-    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+    <li><a href="#book" onclick="toggleMenu()">Book</a></li>
+    <li><a href="#admin" onclick="toggleMenu()">Admin</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="home" class="hero">
-  <h1>Find Trusted Local Services</h1>
-  <p>Fast, Reliable & Nearby Service Providers</p>
-
-  <div class="buttons">
-    <a class="btn" href="#">Book a Service</a>
-    <a class="btn" href="#">Join as Provider</a>
-  </div>
+  <h1>SevaHub 4.0</h1>
+  <p>Smart Local Service Platform + Admin System</p>
 </section>
 
 <!-- SERVICES -->
-<section id="services" class="section">
-  <h2>Our Services</h2>
+<div class="cards">
+  <div class="card">💆 Head Massage</div>
+  <div class="card">🧹 Cleaning</div>
+  <div class="card">📚 Tutor</div>
+</div>
 
-  <div class="cards">
+<!-- BOOKING -->
+<section id="book">
+  <h2 style="text-align:center;">Book Service</h2>
 
-    <div class="card">
-      <h3>💆 Head Massage</h3>
-      <p>At-home professional massage service.</p>
-    </div>
+  <div class="form">
+    <input id="name" placeholder="Name">
+    <input id="phone" placeholder="Phone">
+    
+    <select id="service">
+      <option>Head Massage</option>
+      <option>Cleaning</option>
+      <option>Tutor</option>
+    </select>
 
-    <div class="card">
-      <h3>🧹 Cleaning</h3>
-      <p>Bathroom & home cleaning services.</p>
-    </div>
+    <input id="area" placeholder="Area">
 
-    <div class="card">
-      <h3>📚 Tutors</h3>
-      <p>Find best teachers near you.</p>
-    </div>
-
+    <button class="btn" onclick="book()">Submit</button>
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq" class="section">
-  <h2>FAQ</h2>
-
-  <div class="cards">
-    <div class="card">
-      <h3>How to book?</h3>
-      <p>Click book button and fill form.</p>
-    </div>
-
-    <div class="card">
-      <h3>Locations?</h3>
-      <p>Currently Jamui & Bhagalpur.</p>
-    </div>
-  </div>
+<!-- ADMIN -->
+<section id="admin" class="admin">
+  <h2>Admin Panel (Requests)</h2>
+  <div id="requests"></div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section">
-  <h2>Contact</h2>
-
-  <div class="card" style="margin:auto;">
-    <p>Use our booking form or email us anytime.</p>
-  </div>
-</section>
+<!-- TOAST -->
+<div class="toast" id="toast">Saved ✅</div>
 
 <footer>
-© 2026 SevaHub | Built with ❤️
+© 2026 SevaHub 4.0
 </footer>
 
-<!-- 🔥 JAVASCRIPT FOR MENU -->
 <script>
 function toggleMenu(){
   document.getElementById("navLinks").classList.toggle("active");
 }
+
+/* SAVE REQUEST */
+function book(){
+  let name=document.getElementById("name").value;
+  let phone=document.getElementById("phone").value;
+  let service=document.getElementById("service").value;
+  let area=document.getElementById("area").value;
+
+  if(!name || !phone || !area){
+    alert("Fill all details");
+    return;
+  }
+
+  let data = {name, phone, service, area};
+
+  let old = JSON.parse(localStorage.getItem("requests") || "[]");
+  old.push(data);
+  localStorage.setItem("requests", JSON.stringify(old));
+
+  showToast();
+  loadRequests();
+}
+
+/* LOAD ADMIN DATA */
+function loadRequests(){
+  let box=document.getElementById("requests");
+  let data=JSON.parse(localStorage.getItem("requests") || "[]");
+
+  box.innerHTML="";
+
+  data.forEach((r,i)=>{
+    box.innerHTML += `
+      <div class="request">
+        <b>${r.name}</b><br>
+        ${r.phone}<br>
+        ${r.service} - ${r.area}
+      </div>
+    `;
+  });
+}
+
+/* TOAST */
+function showToast(){
+  let t=document.getElementById("toast");
+  t.style.display="block";
+  setTimeout(()=>t.style.display="none",2000);
+}
+
+/* INIT */
+loadRequests();
 </script>
 
 </body>
