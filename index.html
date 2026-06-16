@@ -122,7 +122,6 @@ footer{
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
-<script>
 const firebaseConfig = {
   apiKey: "PASTE_HERE",
   authDomain: "PASTE_HERE",
@@ -135,30 +134,40 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+/* BOOK FUNCTION */
 function book(){
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let service = document.getElementById("service").value;
-  let area = document.getElementById("area").value;
+
+  let name = document.getElementById("name");
+  let phone = document.getElementById("phone");
+  let service = document.getElementById("service");
+  let area = document.getElementById("area");
 
   if(!name || !phone || !area){
+    alert("Form missing!");
+    return;
+  }
+
+  if(!name.value || !phone.value || !area.value){
     alert("Fill all details");
     return;
   }
 
   db.collection("bookings").add({
-    name: name,
-    phone: phone,
-    service: service,
-    area: area,
+    name: name.value,
+    phone: phone.value,
+    service: service.value,
+    area: area.value,
     time: new Date()
   });
 
-  alert("Booking Saved Successfully 🚀");
+  alert("Booking Saved 🚀");
 }
 
+/* LOAD BOOKINGS */
 function loadBookings(){
+
   const box = document.getElementById("requests");
+  if(!box) return;
 
   db.collection("bookings").orderBy("time","desc")
   .onSnapshot(snapshot => {
@@ -169,7 +178,7 @@ function loadBookings(){
       let r = doc.data();
 
       box.innerHTML += `
-        <div class="request">
+        <div class="card">
           <b>${r.name}</b><br>
           ${r.phone}<br>
           ${r.service} - ${r.area}
@@ -180,8 +189,7 @@ function loadBookings(){
   });
 }
 
-loadBookings();
-</script>
+window.onload = loadBookings;
 
 <!-- NAVBAR -->
 <nav class="navbar">
@@ -195,7 +203,22 @@ loadBookings();
 </nav>
 
 <!-- HERO -->
-<section id="home" class="hero">
+<h2>Find Trusted Local Services Near You</h2>
+<p>Quickly connect with Teachers, Bathroom Cleaners and Head Massage Providers in Jamui & Bhagalpur.</p>
+
+<!-- 🔥 ADD THIS FORM (NEW PART) -->
+<input id="name" placeholder="Your Name" style="padding:10px;margin:5px;"><br>
+<input id="phone" placeholder="Phone" style="padding:10px;margin:5px;"><br>
+
+<select id="service" style="padding:10px;margin:5px;">
+  <option>Head Massage</option>
+  <option>Bathroom Cleaning</option>
+  <option>Teacher</option>
+</select><br>
+
+<input id="area" placeholder="Area" style="padding:10px;margin:5px;"><br>
+
+<button onclick="book()" class="btn">Book Now</button>
   <h2>Find Trusted Local Services Near You</h2>
   <p>Quickly connect with Teachers, Bathroom Cleaners and Head Massage Providers in Jamui & Bhagalpur.</p>
 
@@ -300,11 +323,35 @@ loadBookings();
 <section id="contact" class="section">
   <h2>Contact Us</h2>
 
-  <div class="card" style="margin:auto;">
+  <div class="card" style="margin:auto;text-align:center;">
+
+    <p>Need help? Contact us instantly 👇</p>
+
+    <!-- 🔥 WhatsApp Button -->
+    <a 
+      href="https://wa.me/919060512088?text=Hello%20SevaHub%20I%20need%20help" 
+      target="_blank"
+      class="btn"
+    >
+      💬 Chat on WhatsApp
+    </a>
+
+    <br><br>
+
+    <!-- 📧 Email Button -->
+    <a 
+      href="mailto:adiraj200987@gmail.com?subject=SevaHub%20Support&body=Hello%20I%20need%20help%20with%20SevaHub" 
+      class="btn"
+    >
+      📧 Send Email
+    </a>
+
+    <br><br>
+
     <p>
-      For bookings, please use the Book a Service form.
-      We currently serve Jamui and Bhagalpur.
+      We usually reply within 1–2 hours 🚀
     </p>
+
   </div>
 </section>
 
