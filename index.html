@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SevaHub Global</title>
+<title>SevaHub District Pro</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial;
-  background:#0a0f1c;
+  background:#0b1220;
   color:white;
 }
 
@@ -24,12 +24,12 @@ body{
 
 .hero{
   text-align:center;
-  padding:70px 20px;
-  background:linear-gradient(135deg,#1e3a8a,#06b6d4);
+  padding:60px 20px;
+  background:linear-gradient(135deg,#1d4ed8,#06b6d4);
 }
 
 .section{
-  padding:30px;
+  padding:25px;
   text-align:center;
 }
 
@@ -63,6 +63,7 @@ button{
   padding:12px;
   margin:10px;
   border-radius:10px;
+  text-align:left;
 }
 </style>
 </head>
@@ -70,35 +71,38 @@ button{
 <body>
 
 <div class="navbar">
-  <b>SevaHub Global</b>
+  <b>SevaHub District Pro</b>
 </div>
 
 <div class="hero">
-  <h1>Global Service Network</h1>
-  <p>Multi-city scalable platform (India ready → Global ready)</p>
+  <h1>Jamui & Bhagalpur Services</h1>
+  <p>Fast Local Booking System</p>
 </div>
 
 <div class="section">
-
 <h2>Book Service</h2>
 
 <div class="form">
+
   <input id="name" placeholder="Name">
   <input id="phone" placeholder="Phone">
 
   <select id="service">
-    <option>Massage</option>
-    <option>Cleaning</option>
+    <option>Head Massage</option>
+    <option>Bathroom Cleaning</option>
     <option>Tutor</option>
-    <option>Electrician</option>
   </select>
 
-  <input id="city" placeholder="City">
+  <select id="city">
+    <option>Jamui</option>
+    <option>Bhagalpur</option>
+  </select>
+
   <input id="area" placeholder="Area">
 
-  <button onclick="book()">Submit</button>
-</div>
+  <button onclick="book()">Book Now</button>
 
+</div>
 </div>
 
 <div class="section">
@@ -112,19 +116,20 @@ button{
 
 <script>
 
+// 🔥 PASTE YOUR FIREBASE CONFIG HERE
 const firebaseConfig = {
-  apiKey: "PASTE",
-  authDomain: "PASTE",
-  projectId: "PASTE",
-  storageBucket: "PASTE",
-  messagingSenderId: "PASTE",
-  appId: "PASTE"
+  apiKey: "PASTE_HERE",
+  authDomain: "PASTE_HERE",
+  projectId: "PASTE_HERE",
+  storageBucket: "PASTE_HERE",
+  messagingSenderId: "PASTE_HERE",
+  appId: "PASTE_HERE"
 };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-/* GLOBAL BOOKING */
+/* BOOKING */
 function book(){
 
   let data = {
@@ -136,25 +141,25 @@ function book(){
     time: Date.now()
   };
 
-  if(!data.name || !data.phone || !data.city){
-    alert("Fill required fields");
+  if(!data.name || !data.phone || !data.area){
+    alert("Fill all fields");
     return;
   }
 
-  db.collection("global_bookings").add(data);
+  db.collection("district_pro_bookings").add(data);
 
-  alert("Booking sent globally 🚀");
+  alert("Booking Saved 🚀");
 }
 
-/* LIVE GLOBAL DATA */
-db.collection("global_bookings")
+/* LIVE DATA */
+db.collection("district_pro_bookings")
 .orderBy("time","desc")
-.onSnapshot(snap=>{
+.onSnapshot(snapshot=>{
 
   let box=document.getElementById("data");
   box.innerHTML="";
 
-  snap.forEach(doc=>{
+  snapshot.forEach(doc=>{
     let d=doc.data();
 
     box.innerHTML += `
