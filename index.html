@@ -1,10 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SevaHub</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:#f5f5f5;
+}
+
+header{
+background:#0066cc;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:15px 0;
+border-radius:10px;
+box-shadow:0 0 5px rgba(0,0,0,0.2);
+}
+
+button{
+background:#0066cc;
+color:white;
+padding:10px 20px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:20px;
+}
+</style>
 </head>
+
 <body>
-<h1>Welcome to SevaHub</h1>
-<p>Book electricians, plumbers, tutors and more.</p>
+
+<header>
+<h1>SevaHub</h1>
+<p>Find Trusted Human Services Near You</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Select District</h2>
+<select>
+<option>Jamui</option>
+<option>Patna</option>
+<option>Gaya</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="card">
+<h2>Select Area</h2>
+<input type="text" placeholder="Enter Area Name">
+</div>
+
+<div class="card">
+<h2>Head Massage</h2>
+<p>Book trained head massage workers.</p>
+<button>Book Service</button>
+</div>
+
+<div class="card">
+<h2>Bathroom Cleaning</h2>
+<p>Professional bathroom cleaning service.</p>
+<button>Book Service</button>
+</div>
+
+<div class="card">
+<h2>Teachers</h2>
+<p>Find home tutors and teachers.</p>
+<button>Book Service</button>
+</div>
+
+</div>
+
+<footer>
+© 2026 SevaHub
+</footer>
+
 </body>
 </html>
