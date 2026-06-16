@@ -3,178 +3,250 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SevaHub District Pro</title>
+<title>SevaHub</title>
 
 <style>
-body{
+*{
   margin:0;
-  font-family:Arial;
-  background:#0b1220;
-  color:white;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
 }
 
+body{
+  background:#f4f6f9;
+}
+
+/* NAVBAR */
 .navbar{
   display:flex;
   justify-content:space-between;
-  padding:15px;
-  background:#111827;
-  position:sticky;
-  top:0;
+  align-items:center;
+  padding:15px 30px;
+  background:#222;
+  color:white;
 }
 
-.hero{
-  text-align:center;
-  padding:60px 20px;
-  background:linear-gradient(135deg,#1d4ed8,#06b6d4);
-}
-
-.section{
-  padding:25px;
-  text-align:center;
-}
-
-.form{
-  max-width:420px;
-  margin:auto;
-  background:#111827;
-  padding:20px;
-  border-radius:12px;
-}
-
-input,select{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border:none;
-  border-radius:6px;
-}
-
-button{
-  width:100%;
-  padding:10px;
-  background:#38bdf8;
-  border:none;
-  cursor:pointer;
+.logo{
+  font-size:20px;
   font-weight:bold;
 }
 
-.card{
-  background:#1f2937;
-  padding:12px;
+.nav-links{
+  list-style:none;
+  display:flex;
+  gap:20px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:white;
+}
+
+.nav-links a:hover{
+  color:#00c3ff;
+}
+
+/* HERO */
+.hero{
+  padding:40px 20px;
+  text-align:center;
+  background:white;
+}
+
+.buttons{
+  margin-top:20px;
+}
+
+.btn{
+  display:inline-block;
+  background:#0d6efd;
+  color:white;
+  padding:12px 20px;
   margin:10px;
-  border-radius:10px;
-  text-align:left;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.btn:hover{
+  background:#084298;
+}
+
+/* SECTIONS */
+.section{
+  padding:40px 20px;
+}
+
+.section h2{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+/* CARDS */
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
+
+.card{
+  background:white;
+  width:280px;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  text-align:center;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+/* FOOTER */
+footer{
+  background:#222;
+  color:white;
+  text-align:center;
+  padding:20px;
+  margin-top:30px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="navbar">
-  <b>SevaHub District Pro</b>
-</div>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">SevaHub</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-<div class="hero">
-  <h1>Jamui & Bhagalpur Services</h1>
-  <p>Fast Local Booking System</p>
-</div>
+<!-- HERO -->
+<section id="home" class="hero">
+  <h2>Find Trusted Local Services Near You</h2>
+  <p>Quickly connect with Teachers, Bathroom Cleaners and Head Massage Providers in Jamui & Bhagalpur.</p>
 
-<div class="section">
-<h2>Book Service</h2>
+  <div class="buttons">
+    <a class="btn" href="https://forms.gle/UJ3TEMYefYrQ45Vx9" target="_blank">Book a Service</a>
+    <a class="btn" href="https://forms.gle/gA8HVf1iFbYveoHU6" target="_blank">Join as Service Provider</a>
+  </div>
+</section>
 
-<div class="form">
+<!-- AREA -->
+<section id="services" class="section">
+  <h2>Select Your Area</h2>
 
-  <input id="name" placeholder="Name">
-  <input id="phone" placeholder="Phone">
+  <div style="text-align:center;">
+    <select style="padding:10px;width:220px;">
+      <option>Jamui</option>
+      <option>Bhagalpur</option>
+    </select>
 
-  <select id="service">
-    <option>Head Massage</option>
-    <option>Bathroom Cleaning</option>
-    <option>Tutor</option>
-  </select>
+    <br><br>
 
-  <select id="city">
-    <option>Jamui</option>
-    <option>Bhagalpur</option>
-  </select>
+    <input type="text" placeholder="Enter Your Area" style="padding:10px;width:220px;">
+  </div>
+</section>
 
-  <input id="area" placeholder="Area">
+<!-- SERVICES -->
+<section class="section">
+  <h2>Our Services</h2>
 
-  <button onclick="book()">Book Now</button>
+  <div class="cards">
 
-</div>
-</div>
+    <div class="card">
+      <h3>💆 Head Massage</h3>
+      <p>Professional head massage services at your location.</p>
+      <a class="btn" href="#">Book Now</a>
+    </div>
 
-<div class="section">
-  <h2>Live Bookings</h2>
-  <div id="data"></div>
-</div>
+    <div class="card">
+      <h3>🧹 Bathroom Cleaning</h3>
+      <p>Clean and hygienic bathroom cleaning service.</p>
+      <a class="btn" href="#">Book Now</a>
+    </div>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <div class="card">
+      <h3>📚 Teachers</h3>
+      <p>Find tutors and teachers near your area.</p>
+      <a class="btn" href="#">Book Now</a>
+    </div>
 
-<script>
+  </div>
+</section>
 
-// 🔥 PASTE YOUR FIREBASE CONFIG HERE
-const firebaseConfig = {
-  apiKey: "PASTE_HERE",
-  authDomain: "PASTE_HERE",
-  projectId: "PASTE_HERE",
-  storageBucket: "PASTE_HERE",
-  messagingSenderId: "PASTE_HERE",
-  appId: "PASTE_HERE"
-};
+<!-- HOW IT WORKS -->
+<section class="section">
+  <h2>How It Works</h2>
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+  <div class="cards">
 
-/* BOOKING */
-function book(){
+    <div class="card">
+      <h3>1. Submit Request</h3>
+      <p>Fill the booking form with your details.</p>
+    </div>
 
-  let data = {
-    name: document.getElementById("name").value,
-    phone: document.getElementById("phone").value,
-    service: document.getElementById("service").value,
-    city: document.getElementById("city").value,
-    area: document.getElementById("area").value,
-    time: Date.now()
-  };
+    <div class="card">
+      <h3>2. We Match</h3>
+      <p>We find a suitable service provider nearby.</p>
+    </div>
 
-  if(!data.name || !data.phone || !data.area){
-    alert("Fill all fields");
-    return;
-  }
+    <div class="card">
+      <h3>3. Get Service</h3>
+      <p>The provider contacts you and completes the service.</p>
+    </div>
 
-  db.collection("district_pro_bookings").add(data);
+  </div>
+</section>
 
-  alert("Booking Saved 🚀");
-}
+<!-- FAQ -->
+<section id="faq" class="section">
+  <h2>Frequently Asked Questions</h2>
 
-/* LIVE DATA */
-db.collection("district_pro_bookings")
-.orderBy("time","desc")
-.onSnapshot(snapshot=>{
+  <div class="cards">
 
-  let box=document.getElementById("data");
-  box.innerHTML="";
+    <div class="card">
+      <h3>How do I book a service?</h3>
+      <p>Click Book Now and fill the booking form.</p>
+    </div>
 
-  snapshot.forEach(doc=>{
-    let d=doc.data();
+    <div class="card">
+      <h3>Which districts are supported?</h3>
+      <p>Currently Jamui and Bhagalpur.</p>
+    </div>
 
-    box.innerHTML += `
-      <div class="card">
-        <b>${d.name}</b><br>
-        ${d.phone}<br>
-        ${d.service}<br>
-        ${d.city} - ${d.area}
-      </div>
-    `;
-  });
+    <div class="card">
+      <h3>How do providers join?</h3>
+      <p>Click Join as Service Provider and fill the form.</p>
+    </div>
 
-});
+  </div>
+</section>
 
-</script>
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <h2>Contact Us</h2>
+
+  <div class="card" style="margin:auto;">
+    <p>
+      For bookings, please use the Book a Service form.
+      We currently serve Jamui and Bhagalpur.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 SevaHub | Jamui & Bhagalpur
+</footer>
 
 </body>
 </html>
