@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<h2>SevaHub Login</h2>
+<h2>Login / Signup</h2>
 
 <input id="email" placeholder="Email">
 <input id="password" type="password" placeholder="Password">
@@ -31,34 +31,31 @@ const db = firebase.firestore();
 
 /* SIGNUP */
 function signup(){
-  let email = emailInput();
-  let pass = passInput();
+  let email = emailVal();
+  let pass = passVal();
 
   auth.createUserWithEmailAndPassword(email, pass)
-  .then((user) => {
+  .then(user => {
 
     db.collection("users").doc(user.user.uid).set({
-      email: email,
+      email,
       role: "user"
     });
 
     alert("Signup Success");
-  })
-  .catch(err => alert(err.message));
+  });
 }
 
 /* LOGIN */
 function login(){
-  let email = emailInput();
-  let pass = passInput();
+  let email = emailVal();
+  let pass = passVal();
 
   auth.signInWithEmailAndPassword(email, pass)
-  .then(async (user) => {
+  .then(async user => {
 
     let doc = await db.collection("users").doc(user.user.uid).get();
     let role = doc.data().role;
-
-    alert("Login Success: " + role);
 
     if(role === "admin"){
       window.location.href = "admin.html";
@@ -70,14 +67,13 @@ function login(){
       window.location.href = "index.html";
     }
 
-  })
-  .catch(err => alert(err.message));
+  });
 }
 
-function emailInput(){
+function emailVal(){
   return document.getElementById("email").value;
 }
-function passInput(){
+function passVal(){
   return document.getElementById("password").value;
 }
 </script>
