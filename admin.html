@@ -8,24 +8,22 @@
 <h2>Admin Dashboard</h2>
 
 <div id="box"></div>
+<div id="providers"></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
-const firebaseConfig = {
+firebase.initializeApp({
   apiKey: "YOUR_KEY",
   authDomain: "YOUR_DOMAIN",
   projectId: "YOUR_ID",
-};
-
-firebase.initializeApp(firebaseConfig);
+});
 
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-/* SECURITY CHECK */
 auth.onAuthStateChanged(async user => {
 
   if(!user){
@@ -40,28 +38,51 @@ auth.onAuthStateChanged(async user => {
     return;
   }
 
-  loadBookings();
+  loadData();
 });
 
-/* LOAD BOOKINGS */
-function loadBookings(){
+/* BOOKINGS */
+function loadData(){
 
   const box = document.getElementById("box");
 
   db.collection("bookings")
   .orderBy("time","desc")
-  .onSnapshot(snapshot => {
+  .onSnapshot(snap => {
 
-    box.innerHTML = "";
+    box.innerHTML = "<h3>Bookings</h3>";
 
-    snapshot.forEach(doc => {
+    snap.forEach(doc => {
+      let r = doc.data();
+      box.innerHTML += `
+        <div style="border:1px solid #000;padding:10px;margin:10px;">
+          ${r.name} - ${r.phone}<br>
+          ${r.service} - ${r.area}
+        </div>
+      `;
+    });
+  });
+
+  loadProviders();
+}
+
+/* PROVIDERS */
+function loadProviders(){
+
+  const box = document.getElementById("providers");
+
+  db.collection("providers")
+  .onSnapshot(snap => {
+
+    box.innerHTML = "<h3>Providers</h3>";
+
+    snap.forEach(doc => {
       let r = doc.data();
 
       box.innerHTML += `
-        <div style="border:1px solid #000;padding:10px;margin:10px;">
-          <b>${r.name}</b><br>
-          ${r.phone}<br>
-          ${r.service} - ${r.area}
+        <div style="border:1px solid green;padding:10px;margin:10px;">
+          ${r.name} - ${r.service} - ${r.district}
+          <br>Verified: ${r.verified}
         </div>
       `;
     });
