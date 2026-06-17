@@ -7,7 +7,7 @@
 
 <h2>Admin Dashboard</h2>
 
-<div id="box"></div>
+<div id="bookings"></div>
 <div id="providers"></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -24,6 +24,7 @@ firebase.initializeApp({
 const auth = firebase.auth();
 const db = firebase.firestore();
 
+/* SECURITY CHECK */
 auth.onAuthStateChanged(async user => {
 
   if(!user){
@@ -38,22 +39,21 @@ auth.onAuthStateChanged(async user => {
     return;
   }
 
-  loadData();
+  loadAll();
 });
 
 /* BOOKINGS */
-function loadData(){
+function loadAll(){
 
-  const box = document.getElementById("box");
-
-  db.collection("bookings")
-  .orderBy("time","desc")
+  db.collection("bookings").orderBy("time","desc")
   .onSnapshot(snap => {
 
+    let box = document.getElementById("bookings");
     box.innerHTML = "<h3>Bookings</h3>";
 
     snap.forEach(doc => {
       let r = doc.data();
+
       box.innerHTML += `
         <div style="border:1px solid #000;padding:10px;margin:10px;">
           ${r.name} - ${r.phone}<br>
@@ -63,17 +63,11 @@ function loadData(){
     });
   });
 
-  loadProviders();
-}
-
-/* PROVIDERS */
-function loadProviders(){
-
-  const box = document.getElementById("providers");
-
+  /* PROVIDERS */
   db.collection("providers")
   .onSnapshot(snap => {
 
+    let box = document.getElementById("providers");
     box.innerHTML = "<h3>Providers</h3>";
 
     snap.forEach(doc => {
@@ -81,12 +75,20 @@ function loadProviders(){
 
       box.innerHTML += `
         <div style="border:1px solid green;padding:10px;margin:10px;">
-          ${r.name} - ${r.service} - ${r.district}
-          <br>Verified: ${r.verified}
+          ${r.name} - ${r.service} - ${r.district}<br>
+          Verified: ${r.verified}
+
+          <button onclick="approve('${doc.id}')">Approve</button>
         </div>
       `;
     });
+  });
+}
 
+/* APPROVE PROVIDER */
+function approve(id){
+  db.collection("providers").doc(id).update({
+    verified: true
   });
 }
 </script>
