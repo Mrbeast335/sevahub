@@ -1,10 +1,10 @@
-<h2>Provider Panel</h2>
+<h2>Provider Registration</h2>
 
 <input id="name" placeholder="Name">
 <input id="service" placeholder="Service">
 <input id="district" placeholder="District">
 
-<button onclick="register()">Register</button>
+<button onclick="register()">Submit</button>
 
 <script>
 const db = firebase.firestore();
@@ -12,12 +12,12 @@ const db = firebase.firestore();
 function register(){
 
   db.collection("providers").add({
-    name: document.getElementById("name").value,
-    service: document.getElementById("service").value,
-    district: document.getElementById("district").value,
+    name: name.value,
+    service: service.value,
+    district: district.value,
     verified: false
   });
 
-  alert("Submitted for approval");
+  alert("Submitted for admin approval");
 }
 </script>
