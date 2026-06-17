@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SevaHub Admin</title>
+<title>Admin Panel</title>
 </head>
 <body>
 
-<h2>Admin Panel - Bookings</h2>
+<h2>Admin Dashboard</h2>
 
-<div id="adminBox"></div>
+<div id="box"></div>
 
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
@@ -21,38 +21,53 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
 const db = firebase.firestore();
 
-/* SIMPLE ADMIN PASSWORD */
-let pass = prompt("Enter Admin Password:");
+/* SECURITY CHECK */
+auth.onAuthStateChanged(async user => {
 
-if(pass !== "1234"){
-  alert("Access Denied");
-  document.body.innerHTML = "❌ Not Allowed";
-}
+  if(!user){
+    document.body.innerHTML = "Login Required";
+    return;
+  }
+
+  let doc = await db.collection("users").doc(user.uid).get();
+
+  if(doc.data().role !== "admin"){
+    document.body.innerHTML = "Access Denied";
+    return;
+  }
+
+  loadBookings();
+});
 
 /* LOAD BOOKINGS */
-const box = document.getElementById("adminBox");
+function loadBookings(){
 
-db.collection("bookings")
-.orderBy("time","desc")
-.onSnapshot(snapshot => {
+  const box = document.getElementById("box");
 
-  box.innerHTML = "";
+  db.collection("bookings")
+  .orderBy("time","desc")
+  .onSnapshot(snapshot => {
 
-  snapshot.forEach(doc => {
-    let r = doc.data();
+    box.innerHTML = "";
 
-    box.innerHTML += `
-      <div style="border:1px solid #000;padding:10px;margin:10px;">
-        <b>${r.name}</b><br>
-        ${r.phone}<br>
-        ${r.service} - ${r.area}
-      </div>
-    `;
+    snapshot.forEach(doc => {
+      let r = doc.data();
+
+      box.innerHTML += `
+        <div style="border:1px solid #000;padding:10px;margin:10px;">
+          <b>${r.name}</b><br>
+          ${r.phone}<br>
+          ${r.service} - ${r.area}
+        </div>
+      `;
+    });
+
   });
-
-});
+}
 </script>
 
 </body>
