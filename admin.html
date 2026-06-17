@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SevaHub Admin</title>
+</head>
+<body>
+
+<h2>Admin Panel - Bookings</h2>
+
+<div id="adminBox"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_ID",
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+/* SIMPLE ADMIN PASSWORD */
+let pass = prompt("Enter Admin Password:");
+
+if(pass !== "1234"){
+  alert("Access Denied");
+  document.body.innerHTML = "❌ Not Allowed";
+}
+
+/* LOAD BOOKINGS */
+const box = document.getElementById("adminBox");
+
+db.collection("bookings")
+.orderBy("time","desc")
+.onSnapshot(snapshot => {
+
+  box.innerHTML = "";
+
+  snapshot.forEach(doc => {
+    let r = doc.data();
+
+    box.innerHTML += `
+      <div style="border:1px solid #000;padding:10px;margin:10px;">
+        <b>${r.name}</b><br>
+        ${r.phone}<br>
+        ${r.service} - ${r.area}
+      </div>
+    `;
+  });
+
+});
+</script>
+
+</body>
+</html>
